@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="container">
+  <view>
+    <button bindtap="showDialogWithPicker" style='margin-bottom:20px;'>根据日期查询</button>
+    <button bindtap="showDialogWithUNameInput">根据用户名查询</button>
+
+    <!--弹窗-->
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove"
+    wx:if="{{showModal}}"></view>
+    <view class="modal-dialog" wx:if="{{showModal}}">
+      <view class="modal-title">输入条件</view>
+      <view class="modal-content">
+        <view class="section" wx:if="{{showModalWithPicker}}"
+        style="background:#fcfadd;width:100%">
+          <picker mode="date" value="{{inputvalue}}" bindchange="bindValueChange">  
+            <view>
+              {{type}}: {{inputvalue}}  
+            </view>
+          </picker>
+        </view>
+        <view wx:if="{{showDialogWithUNameInput||showDialogWithDNameInput}}">
+          {{type}}:<input value="{{inputvalue}}"
+        style="background:#fcfadd;width:100%" bindchange="bindValueChange"/>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+        <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+/* pages/login/login.wxss */
+form{    
+  width: 100%;    
+  border: 1px;    
+}
+.container{
+  margin: 0 auto;
+  width: 80%;
+}
+.section{    
+  margin: 50rpx auto;    
+}    
+input{    
+  border: 1px solid #ccc;    
+  height:100rpx;    
+}    
+.header{    
+  padding-top: 20rpx;    
+} 
