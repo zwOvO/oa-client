@@ -1,8 +1,9 @@
 <!--index.wxml-->
 <view class="container">
   <view>
-    <button bindtap="showDialogWithPicker" style='margin-bottom:20px;'>根据日期查询</button>
-    <button bindtap="showDialogWithUNameInput">根据用户名查询</button>
+    <button class='mune-button' bindtap="showDialogWithPicker">考勤记录查询</button>
+    <button class='mune-button' bindtap="bindViewTap">请假</button>
+    <button class='mune-button' bindtap="bindPicTap">考勤图</button>
 
     <!--弹窗-->
     <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove"
@@ -12,15 +13,11 @@
       <view class="modal-content">
         <view class="section" wx:if="{{showModalWithPicker}}"
         style="background:#fcfadd;width:100%">
-          <picker mode="date" value="{{inputvalue}}" bindchange="bindValueChange">  
+          <picker mode="date" value="{{inputvalue}}" fields="month" bindchange="bindValueChange">  
             <view>
-              {{type}}: {{inputvalue}}  
+              {{type}}: {{inputvalue}}
             </view>
           </picker>
-        </view>
-        <view wx:if="{{showDialogWithUNameInput||showDialogWithDNameInput}}">
-          {{type}}:<input value="{{inputvalue}}"
-        style="background:#fcfadd;width:100%" bindchange="bindValueChange"/>
         </view>
       </view>
       <view class="modal-footer">

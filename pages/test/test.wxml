@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove"
+  wx:if="{{!hasUserInfo && canIUse}}"></view>
+  <view class="modal-dialog" wx:if="{{!hasUserInfo && canIUse}}">
+    <view class="modal-title">授权app</view>
+    <view class="modal-content">
+      <view class="section" wx:if="{{showModalWithPicker}}"
+      style="background:#fcfadd;width:100%">
+        <picker mode="date" value="{{inputvalue}}" fields="month" bindchange="bindValueChange">  
+          <view>
+            {{type}}: {{inputvalue}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="modal-footer">
+      <button class="btn-confirm" open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-status="confirm">确定</button>
+    </view>
+  </view>
+  <view class="userinfo">
+    <block wx:if="{{hasUserInfo && canIUse}}">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <button bindtap="scanningCode">打卡</button>
+    </block>
+  </view>
+  <view class="usermotto" wx:if="{{hasUserInfo}}">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>

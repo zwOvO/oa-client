@@ -1,19 +1,17 @@
 /* pages/login/login.wxss */
-form{    
-  width: 100%;    
-  border: 1px;    
+form{
+  width: 80%;    
+  border: 1px;
+}
+button{
+  margin: 20rpx;
 }
 .container{
-  margin: 0 auto;
-  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
 }
-.section{    
-  margin: 50rpx auto;    
-}    
-input{    
-  border: 1px solid #ccc;    
-  height:100rpx;    
-}    
-.header{    
-  padding-top: 20rpx;    
-} 

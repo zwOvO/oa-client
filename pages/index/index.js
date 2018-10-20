@@ -12,6 +12,10 @@ Page({
   },
   onLoad: function () {
   },
+
+
+
+
   bindValueChange: function (e) {
     this.setData({
       inputvalue: e.detail.value
@@ -34,6 +38,16 @@ Page({
       showModalWithInput: false,
       showDialogWithUNameInput: true,
       type: "用户名"
+    })
+  },
+  bindViewTap: function () {
+    wx.navigateTo({
+      url: ''
+    })
+  },
+  bindPicTap: function () {
+    wx.navigateTo({
+      url: '../ff-canvas/column/column'
     })
   },
   /**

@@ -1,18 +1,9 @@
 <view class='container'>
-  <form bindsubmit='formSubmit' bindreset='formReset'>    
-    <view class='section'>    
-       <text>用户名：</text>    
-       <input name="name" value='郑文' placeholder='请输入用户名'></input>    
-    </view>    
-    <view class='section'>    
-      <text>密码：</text>    
-      <input password='true' name="pwd" value='123456'></input>    
-    </view>
-   <view class='section'>    
-     <button type='primary' form-type='submit'>登录</button>    
-   </view> 
-  </form>
-  <view class='section' style='align-text:center'>    
-     登录信息：{{status}}
+  <form bindsubmit='formSubmit'>
+   <view>
+     <input name="uuid" hidden='true' value='{{uuid}}'></input>
+     <button type='primary' form-type='submit'>确认身份</button>
+     <button type='default' bindtap='onCancel'>取消</button>
    </view>
-</view>   
+  </form>
+</view>

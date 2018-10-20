@@ -11,8 +11,8 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.98",
-	"appid": "wx2d1284962ee54783",
+	"libVersion": "2.3.0",
+	"appid": "wx060c24db20a8d971",
 	"projectname": "oa-client",
 	"isGameTourist": false,
 	"condition": {
