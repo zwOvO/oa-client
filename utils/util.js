@@ -36,8 +36,47 @@ function fib(n) {
   return fib(n - 1) + fib(n - 2)
 }
 
+/**
+ * 封装微信的的request
+ */
+function request(url, data = {}, method = "GET") {
+  return new Promise(function (resolve, reject) {
+    wx.request({
+      url: url,
+      data: data,
+      method: method,
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': `${wx.getStorageSync('token')}`
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          resolve(res.data);
+        } else {
+          reject(res.message);
+        }
+
+      },
+      fail: function (err) {
+        reject(err)
+        console.log("failed")
+      }
+    })
+  });
+}
+
+function showErrorToast(msg) {
+  wx.showToast({
+    title: msg,
+    image: 'images/icon_error.png'
+  })
+}
+
 module.exports = {
   formatTime,
   formatLocation,
-  fib
+  fib,
+  
+  request,
+  showErrorToast,
 }

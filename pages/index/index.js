@@ -42,12 +42,12 @@ Page({
   },
   bindViewTap: function () {
     wx.navigateTo({
-      url: ''
+      url: 'leave/leave'
     })
   },
   bindPicTap: function () {
     wx.navigateTo({
-      url: '../ff-canvas/column/column'
+      url: 'ff-canvas/column/column'
     })
   },
   /**
@@ -88,7 +88,7 @@ Page({
       inputvalue: ""
     })
     wx.navigateTo({
-      url: '../info/info?parm=' + JSON.stringify(parm)
+      url: 'info/info?parm=' + JSON.stringify(parm)
     })
   }
 })

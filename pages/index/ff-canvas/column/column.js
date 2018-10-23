@@ -1,5 +1,4 @@
-// pages/column/column.js
-import F2 from '../../../libs/f2-canvas/lib/f2';
+import F2 from '../../../../libs/f2-canvas/lib/f2';
 
 let chart = null;
 

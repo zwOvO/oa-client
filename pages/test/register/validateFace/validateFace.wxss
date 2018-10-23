@@ -1,0 +1,16 @@
+
+form{
+  width: 100%;    
+  border: 1px;
+}
+button{
+  margin: 20rpx;
+}
+.container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}

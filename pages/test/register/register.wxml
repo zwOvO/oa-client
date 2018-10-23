@@ -1,0 +1,32 @@
+<import src="../../common/head.wxml" />
+<import src="../../common/foot.wxml" />
+<view class='container'>
+  <template is="head" data="{{title: '请填写用户注册信息'}}"/>
+  <form bindsubmit='formSubmit'>
+    <view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">姓名</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" require='require' bindblur='bindNameInput' name="username" value='{{username}}'/>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">性别</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker value="{{index}}" bindchange="bindGenderChange" range-key="value" range='{{gender}}'>
+              <view class="weui-input">{{gender[index].value}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <button type='primary' form-type='submit'>确认</button>
+    </view>
+  </form>
+</view>

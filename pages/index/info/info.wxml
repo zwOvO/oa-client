@@ -2,14 +2,10 @@
 <view class="container" style='padding-top:0rpx'>
   <view class="table">
     <view class="tr">
-      <view class="th">用户标识</view>
-      <view class="th">用户名</view>
       <view class="th">打卡时间</view>
       
     </view>
     <view class="tr" wx:for="{{infoarray}}">
-      <view class="td">{{item.UserID}}</view>
-      <view class="td">{{item.UserName}}</view>
       <view class="td">{{item.CreateTime}}</view>
     </view>
   </view>

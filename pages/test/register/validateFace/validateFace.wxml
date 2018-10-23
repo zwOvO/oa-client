@@ -1,0 +1,19 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+<view class='container'>
+  <template is="head" data="{{title: '用户照片身份验证'}}"/>
+  <view class="page-section">
+        <view class="page-body-info">
+          <block wx:if="{{imageSrc}}">
+            <image src="{{imageSrc}}" class="image" mode="aspectFit"></image>
+          </block>
+          <block wx:else>
+            <view class="image-plus image-plus-nb" bindtap="chooseImage">
+              <view class="image-plus-horizontal"></view>
+              <view class="image-plus-vertical"></view>
+            </view>
+            <view class="image-plus-text">上传用户照片完成注册</view>
+          </block>
+        </view>
+      </view>
+</view>

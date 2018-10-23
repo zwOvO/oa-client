@@ -1,10 +1,13 @@
 {
   "pages": [
-    "pages/login/login",
     "pages/test/test",
+    "pages/test/register/register",
+    "pages/test/register/validateFace/validateFace",
+    "pages/test/login/login",
     "pages/index/index",
-    "pages/info/info",
-    "pages/ff-canvas/column/column"
+    "pages/index/leave/leave",
+    "pages/index/info/info",
+    "pages/index/ff-canvas/column/column"
   ],
   "window": {
     "backgroundTextStyle": "light",

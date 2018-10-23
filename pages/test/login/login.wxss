@@ -1,4 +1,4 @@
-/* pages/login/login.wxss */
+
 form{
   width: 80%;    
   border: 1px;

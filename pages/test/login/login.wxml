@@ -2,7 +2,7 @@
   <form bindsubmit='formSubmit'>
    <view>
      <input name="uuid" hidden='true' value='{{uuid}}'></input>
-     <button type='primary' form-type='submit'>确认身份</button>
+     <button type='primary' form-type='submit'>确认</button>
      <button type='default' bindtap='onCancel'>取消</button>
    </view>
   </form>
