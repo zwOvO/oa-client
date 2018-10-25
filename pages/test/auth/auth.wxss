@@ -1,0 +1,29 @@
+/* pages/auth/auth.wxss */
+page{
+  background-color: #fff;
+  height:100%;
+}
+.img-view{
+ margin-top: 30%;
+ margin-bottom: 40px;
+ text-align:center;
+}
+.text-view{
+  margin: 30px;
+  text-align:center;
+}
+.btn-view{
+  margin: 20px
+}
+.img{
+ width: 40%
+}
+.text{
+  font-size: 18px;
+}
+.btn{
+  width: 60%;
+   border-radius: 25px;
+  background-color: #00b7ee;
+  color: #fff;
+}

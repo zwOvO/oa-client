@@ -21,15 +21,18 @@ function login(code, userInfo){
     util.request(api.miniprogramLogin, { code: code, userInfo: userInfo }, 'POST').then(res => {
       if (res.status == 200) {
         //存储用户信息
-        app.globalData.hasUserInfo = true
+        app.globalData.hasLogin = true
         app.globalData.userInfo = userInfo
         app.globalData.openid = res.result.openid
         app.globalData.session_key = res.result.session_key
+        console.log(app.globalData)
         resolve(app.globalData);
       } else {
+        console.log(res)
         reject(res);
       }
     }).catch((err) => {
+      console.log(err)
       reject(err);
     });
   })

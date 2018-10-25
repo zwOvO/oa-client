@@ -1,13 +1,34 @@
 <!--pages/info/info.wxml-->
-<view class="container" style='padding-top:0rpx'>
+<wxs module="dateUtil">
+  function format(ts) {
+    var d = getDate(ts)
+    var Y=d.getFullYear();  
+    var M=p(d.getMonth()+1);  
+    var D=p(d.getDate()); 
+    //var s = d.toLocaleString();
+    var hh = p(d.getHours());
+    var mm = p(d.getMinutes());  
+    ss = p(d.getMilliseconds());
+    return Y+'年'+M+'月'+D+'日 '+' '+hh+":"+mm+":"+ss; 
+  }
+  function p(s) {
+        return s < 10 ? '0' + s: s;
+        }
+  module.exports.format = format
+</wxs>
+
+<import src="../../common/head.wxml" />
+<import src="../../common/foot.wxml" />
+<view class="container">
+  <template is="head" data="{{title: '我的打卡记录 - 滑动加载更多'}}"/>
   <view class="table">
-    <view class="tr">
-      <view class="th">打卡时间</view>
-      
-    </view>
-    <view class="tr" wx:for="{{infoarray}}">
-      <view class="td">{{item.CreateTime}}</view>
+    <view class="section section_gap">
+      <scroll-view class="scroll-view_H" scroll-y bindscrolltolower="lower">
+          <view class="tr" wx:key="item.uuid" wx:for-index="index" wx:for-item="item" wx:for="{{recordList}}">
+            <view class="td">{{dateUtil.format(item.createTime)}}</view>
+          </view>
+        </scroll-view>
     </view>
   </view>
-  
+  <template is="foot" />
 </view>

@@ -5,38 +5,55 @@
   <template is="head" data="{{title: '我的'}}"/>
   <view>
     <view class="button-group">
-      <button class='mune-button' bindtap="showDialogWithPicker">考勤记录查询</button>
+      <button class='mune-button' bindtap="showDialogWithPicker">考勤记录查看</button>
       <button class='mune-button' bindtap="bindViewTap">请假</button>
-      <button class='mune-button' bindtap="bindPicTap">考勤图</button>
+      <button class='mune-button' bindtap="bindPicTap">考勤图表查看</button>
     </view>
     <!--弹窗-->
     <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove"
     wx:if="{{showModal}}"></view>
     <view class="modal-dialog" wx:if="{{showModal}}">
-      <view class="modal-title">请输入需要查询的月份</view>
-      <view class="weui-cells__title">请选择开始月份</view>
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">开始</view>
+      <view class="modal-title">请输入需要查询的日期</view>
+      <view wx:if="{{showType == 'record'}}">
+        <view class="weui-cells__title">请选择开始日期</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">开始</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker mode="date" fields="day" value="{{startTime}}" bindchange="bindStartTimeChange">
+                <view class="weui-input">{{startTime}}</view>
+              </picker>
+            </view>
           </view>
-          <view class="weui-cell__bd">
-            <picker mode="date" fields="month" value="{{inputvalue}}" bindchange="bindValueChange">
-              <view class="weui-input">{{inputvalue}}</view>
-            </picker>
+        </view>
+        <view class="weui-cells__title">请选择结束日期</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">结束</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker mode="date" fields="day" value="{{stopTime}}" bindchange="bindStopTimeChange">
+                <view class="weui-input">{{stopTime}}</view>
+              </picker>
+            </view>
           </view>
         </view>
       </view>
-      <view class="weui-cells__title">请选择结束月份</view>
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">结束</view>
-          </view>
-          <view class="weui-cell__bd">
-            <picker mode="date" fields="month" value="{{inputvalue}}" bindchange="bindValueChange">
-              <view class="weui-input">{{inputvalue}}</view>
-            </picker>
+      <view wx:if="{{showType == 'f2'}}">
+        <view class="weui-cells__title">请选择日期</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">日期</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker mode="date" fields="day" value="{{startTime}}" bindchange="bindStartTimeChange">
+                <view class="weui-input">{{startTime}}</view>
+              </picker>
+            </view>
           </view>
         </view>
       </view>
@@ -47,4 +64,5 @@
       </view>
     </view>
   </view>
+  <template is="foot" />
 </view>

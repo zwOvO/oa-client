@@ -1,24 +1,24 @@
 //index.js
 //获取应用实例
-const app = getApp()
 
 Page({
   data: {
-    inputvalue:"",
+    startTime: undefined,
+    stopTime:undefined,
     showModal: false,
-    showModalWithPicker:false,
-    showDialogWithUNameInput:false,
-    type:null
+    showType:'',
   },
   onLoad: function () {
   },
 
-
-
-
-  bindValueChange: function (e) {
+  bindStartTimeChange: function (e) {
     this.setData({
-      inputvalue: e.detail.value
+      startTime: e.detail.value
+    })
+  },
+  bindStopTimeChange: function (e) {
+    this.setData({
+      stopTime: e.detail.value
     })
   },
   /**
@@ -27,17 +27,7 @@ Page({
   showDialogWithPicker: function () {
     this.setData({
       showModal: true,
-      showModalWithPicker: true,
-      showDialogWithUNameInput:false,
-      type:"日期"
-    })
-  },
-  showDialogWithUNameInput: function () {
-    this.setData({
-      showModal: true,
-      showModalWithInput: false,
-      showDialogWithUNameInput: true,
-      type: "用户名"
+      showType:'record',
     })
   },
   bindViewTap: function () {
@@ -46,8 +36,9 @@ Page({
     })
   },
   bindPicTap: function () {
-    wx.navigateTo({
-      url: 'ff-canvas/column/column'
+    this.setData({
+      showModal: true,
+      showType: 'f2',
     })
   },
   /**
@@ -78,17 +69,35 @@ Page({
    * 对话框确认按钮点击事件
    */
   onConfirm: function () {
-    this.hideModal();
-    var that = this;
-    var parm = {
-      "type": that.data.type,
-      "value": that.data.inputvalue
-    };
-    that.setData({
-      inputvalue: ""
-    })
-    wx.navigateTo({
-      url: 'info/info?parm=' + JSON.stringify(parm)
-    })
+    const that = this;
+    const showType = this.data.showType;
+    const startTime = this.data.startTime;
+    if(showType == "record")
+    {
+      const stopTime = this.data.stopTime;
+      if (typeof (startTime) == "undefined"){
+        wx.showToast({
+          title: '开始日期不能为空',
+          icon:'none',
+          duration: 2000
+        })
+        return
+      } else if (typeof (stopTime) == "undefined"){
+        wx.showToast({
+          title: '结束日期不能为空',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+      this.hideModal();
+      wx.navigateTo({
+        url: `info/info?startTime=${startTime}&stopTime=${stopTime}`,
+      })
+    } else if (showType == "f2"){
+      wx.navigateTo({
+        url: `ff-canvas/column/column?startTime=${startTime}`,
+      })
+    }
   }
 })

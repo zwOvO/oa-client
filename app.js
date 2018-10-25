@@ -2,9 +2,15 @@ const ServerApi = require('utils/api.js')
 
 App({
   onLaunch(opts) {
+    wx.redirectTo({
+      url: 'pages/test/auth/auth',
+    })
     console.log('App Launch', opts)
   },
   onShow(opts) {
+    wx.redirectTo({
+      url: 'pages/test/auth/auth',
+    })
     console.log('App Show', opts)
   },
   onHide() {

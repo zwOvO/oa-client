@@ -83,9 +83,10 @@ page {
   color: #1aad19;
   font-size: 0;
 }
+
 .icon-foot{
-  width: 152rpx;
-  height: 23rpx;
+  width: 200rpx;
+  height: 32rpx;
 }
 
 .page-section{
@@ -125,7 +126,6 @@ page {
 
 /* widget */
 .btn-area{
-  margin-top: 60rpx;
   box-sizing: border-box;
   width: 100%;
   padding: 0 30rpx;

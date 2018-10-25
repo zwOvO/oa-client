@@ -2,27 +2,21 @@
 <import src="../../common/foot.wxml" />
 
 <view class="container">
-  <template is="head" data="{{title: '请假申请'}}"/>
+  <template is="head" data="{{title: '请假'}}"/>
 
   <view class="page-body">
-    <form catchsubmit="formSubmit" catchreset="formReset">
-
-      <view class="page-section">
-        <view class="page-section-title">请假理由</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__bd">
-              <input class="weui-input" name="input" placeholder="请输入请假理由" />
-            </view>
-          </view>
-        </view>
-      </view>
-
+    <view class="page-section">
       <view class="btn-area">
-        <button type="primary" formType="submit">提交</button>
-        <button formType="reset">重置</button>
+        <button type="primary" data-id='-1' bindtap='leaveForm'>请假申请</button>
       </view>
-    </form>
+    </view>
+    <view class="page-section">
+      <view class="page-section-spacing">
+        <scroll-view scroll-y="true" style="height: 600rpx;background-color:red">
+          <button type="primary">页面主操作 Normal</button>
+        </scroll-view>
+      </view>
+    </view>
   </view>
 
   <template is="foot" />

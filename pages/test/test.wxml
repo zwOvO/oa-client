@@ -1,31 +1,11 @@
 <import src="../common/head.wxml" />
 <import src="../common/foot.wxml" />
 <view class="container">
-  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{!hasUserInfo && canIUse}}"></view>
-  <view class="modal-dialog" wx:if="{{!hasUserInfo && canIUse}}">
-    <view class="modal-title">授权app</view>
-    <view class="modal-content">
-      <view class="section" wx:if="{{showModalWithPicker}}"
-      style="background:#fcfadd;width:100%">
-        <picker mode="date" value="{{inputvalue}}" fields="month" bindchange="bindValueChange">  
-          <view>
-            {{type}}: {{inputvalue}}
-          </view>
-        </picker>
-      </view>
-    </view>
-    <view class="modal-footer">
-      <button class="btn-confirm" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" data-status="confirm">确定</button>
-    </view>
-  </view>
-
-
-  <template is="head" data="{{title: '考勤打卡应用'}}" wx:if="{{hasUserInfo && canIUse}}"/>
+  <template is="head" data="{{title: '考勤打卡应用'}}"/>
   <view class="userinfo">
-    <block wx:if="{{hasUserInfo && canIUse}}">
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <button bindtap="scanningCode">打卡</button>
-    </block>
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <button bindtap="scanningCode">打卡</button>
   </view>
+  <template is="foot" />
 </view>

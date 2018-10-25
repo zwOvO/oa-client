@@ -1,44 +1,111 @@
 // pages/info/info.js
+const app = getApp()
+const recordApi = require('../../../services/record.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    type:"",
-    value:"",
-    infoarray:""
+    recordList: undefined,
+    current: 0,
+    size: 10,
+    startTime: undefined,
+    stopTime: undefined,
+    openId: undefined,
+    hasMore: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var parm = JSON.parse(options.parm);
     var that = this;
     this.setData({
-      type: parm.type,
-      value: parm.value
+      openId : app.globalData.openid,
+      startTime: options.startTime + " 00:00:00",
+      stopTime: options.stopTime + " 23:59:59",
+      recordList:[]
     })
-    // wx.request({
-    //   url: 'http://192.168.43.64:8080/yibanapi/selectapi',
-    //   method: 'POST',
-    //   data: {
-    //     type: that.data.type,
-    //     value: that.data.value
-    //   },
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded' // 默认值
-    //   },
-    //   success: function (res) {
-    //     console.log(res.data);
-    //     that.setData({
-    //       infoarray:res.data
-    //     })
-    //   }
-    // })
-    this.setData({
-      inputvalue: ""
+    wx.showLoading({
+      title: '加载中',
     })
+    recordApi.getRecordList(that.data.openId, that.data.current, that.data.size, that.data.startTime, that.data.stopTime)
+    .then((response) => {
+      console.log(response)
+      wx.hideLoading();
+      if (response.status == 200) {
+        that.setData({
+          recordList: that.data.recordList.concat(response.result),
+          current: 1 + that.data.current
+        })
+      } else if (response.status == 404) {
+        wx.showToast({
+          title: '已加载到底!',
+          icon: "none",
+          duration: 2000
+        })
+        that.setData({
+          hasMore: false
+        })
+      } else {
+        wx.showToast({
+          title: '加载失败!',
+          icon: "none",
+          duration: 2000
+        })
+      }
+    }).catch((res) => {
+      wx.hideLoading();
+      wx.showToast({
+        title: '加载失败!',
+        icon: "none",
+        duration: 2000
+      })
+    })
+  },
+
+  lower: function (e) {
+    const that = this;
+    if (that.data.hasMore)
+    {
+      wx.showLoading({
+        title: '加载中',
+      })
+      recordApi.getRecordList(that.data.openId, that.data.current, that.data.size, that.data.startTime, that.data.stopTime).then((response) => {
+        if (response.status == 200) {
+          that.setData({
+            recordList: that.data.recordList.concat(response.result),
+            current: 1 + that.data.current
+          })
+          wx.hideLoading();
+        } else if (response.status == 404) {
+          wx.showToast({
+            title: '已加载到底!',
+            icon: "none",
+            duration: 2000
+          })
+          that.setData({
+            hasMore: false
+          })
+        } else {
+          console.log(response)
+          wx.hideLoading();
+          wx.showToast({
+            title: '加载失败!',
+            icon: "none",
+            duration: 2000
+          })
+        }
+      }).catch((res) =>{
+        console.log(res)
+        wx.hideLoading();
+        wx.showToast({
+          title: '加载失败!',
+          icon: "none",
+          duration:2000
+        })
+      })
+    }
   },
 })

@@ -21,15 +21,20 @@ function punchTheClock(openId, uuid) {
   })
 }
 
-function getRecordList(openId, current, size) {
+function getRecordList(openId, current, size, startTime, stopTime) {
   return new Promise((resolve, reject) => {
-    util.request(api.getRecordList, { openId, current, size }, 'GET').then(res => {
-      if (res.status == 200) {
-        //存储用户信息
-        resolve(res);
-      } else {
-        reject(res);
-      }
+    util.request(api.getRecordList + `/${openId}`, { current, size, startTime, stopTime }, 'GET').then(res => {
+      resolve(res);
+    }).catch((err) => {
+      reject(err);
+    });
+  })
+}
+
+function getRecordListByDate(openId, date) {
+  return new Promise((resolve, reject) => {
+    util.request(api.getRecordList + `/${openId}`, { date }, 'GET').then(res => {
+      resolve(res);
     }).catch((err) => {
       reject(err);
     });
@@ -38,7 +43,8 @@ function getRecordList(openId, current, size) {
 
 module.exports = {
   punchTheClock,
-  getRecordList
+  getRecordList,
+  getRecordListByDate
 };
 
 
