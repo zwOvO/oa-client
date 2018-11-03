@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    license: '',
     username:'',
     gender: [
       {
@@ -22,7 +23,6 @@ Page({
 
     imageSrc: '',
     faceToken:'',
-
     inputting:true,
   },
 
@@ -36,6 +36,11 @@ Page({
   bindNameInput: function (e) {
     this.setData({
       username: e.detail.value
+    })
+  },
+  bindLicenseInput: function (e) {
+    this.setData({
+      license: e.detail.value
     })
   },
 
@@ -62,24 +67,36 @@ Page({
     })
     const openId = app.globalData.openid
     const userInfo = app.globalData.userInfo
+    const license = self.data.license
     const username = self.data.username
     const nickname = userInfo.nickName
     const avatar = userInfo.avatarUrl
     const gender = self.data.index + 1
-    userApi.register(openId, nickname, username, avatar, '', gender).then((response) => {
-      wx.hideLoading()
-      wx.showToast({
-        title: '注册成功！',
-        icon: 'success',
-        duration: 1000
-      })
-      wx.redirectTo({
-        url: 'validateFace/validateFace',
-      })
+    console.log(license)
+    userApi.bindLicense(license).then((response) => {
+      userApi.register(openId, nickname, username, avatar, '', gender).then((response) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '注册成功！',
+          icon: 'success',
+          duration: 1000
+        })
+        wx.redirectTo({
+          url: 'validateFace/validateFace',
+        })
+      }).catch((response) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '注册失败！',
+          icon: 'none',
+          duration: 1000
+        })
+        console.log('失败：' + response);
+      });
     }).catch((response) => {
       wx.hideLoading()
       wx.showToast({
-        title: '注册失败！',
+        title: '授权码无效！',
         icon: 'none',
         duration: 1000
       })

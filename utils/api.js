@@ -7,6 +7,7 @@ const api = {
   register: `${host}/user/register`,
   miniprogramLogin: `${host}/login/miniprogram`,
   uploadFace: `${host}/user/face`,
+  bindLicense: `${host}/user/bindLicense`,
 
   punchTheClock: `${host}/record`,
   getRecordList: `${host}/record/list`,

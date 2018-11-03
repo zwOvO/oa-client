@@ -78,13 +78,27 @@ function register(openId, nickname, username, avatar, faceToken, gender) {
   })
 }
 
-
+function bindLicense(licenseStr) {
+  return new Promise((resolve, reject) => {
+    util.request(api.bindLicense + `/${app.globalData.openid}/${licenseStr}`, {  }, 'POST').then(res => {
+      if (res.status == 200) {
+        //存储用户信息
+        resolve(res);
+      } else {
+        reject(res);
+      }
+    }).catch((err) => {
+      reject(err);
+    });
+  })
+}
 
 module.exports = {
     login,
     updateFace,
     register,
     checkUserExist,
+    bindLicense,
 };
 
 

@@ -7,6 +7,16 @@
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
+            <view class="weui-label">授权码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" require='require' bindblur='bindLicenseInput' name="license" value='{{license}}'/>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
             <view class="weui-label">姓名</view>
           </view>
           <view class="weui-cell__bd">
