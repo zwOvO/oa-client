@@ -1,7 +1,9 @@
 import F2 from '../../../../libs/f2-canvas/lib/f2';
 import moment from '../../../../utils/moment';
+import recordApi from '../../../../services/record.js'
+const app = getApp()
 let chart = null;
-
+let that;
 function initChart(canvas, width, height) { // 使用 F2 绘制图表
   // 自定义 shape
   // point 为矩形的四个顶点，顺序
@@ -46,22 +48,6 @@ function initChart(canvas, width, height) { // 使用 F2 绘制图表
   });
 
   // ------------- 绘制图表 -------------
-  var data = [{
-    date: '06-27',
-    time: 1530227400000
-  }, // 2018-06-29 07:10:00
-  {
-    date: '28',
-    time: 1530267780000
-  }, // 2018-06-29 18:23:00
-  {
-    date: '29'
-  }, {
-    date: '30'
-  }, {
-    date: '07-01',
-    time: 1530274980000
-  }];
 
   chart = new F2.Chart({
     el: canvas,
@@ -69,12 +55,15 @@ function initChart(canvas, width, height) { // 使用 F2 绘制图表
     height
   });
 
-  chart.source(data, {
+  let min = that.data.timeStamp
+  let max = min + 86399000
+
+  chart.source(that.data.data, {
     time: {
-      min: 1530201600000, // 2018-06-29 00:00:00
-      max: 1530287999000, // 2018-06-29 23:59:59
+      min: min, // 2018-06-29 00:00:00
+      max: max, // 2018-06-29 23:59:59
       nice: false,
-      ticks: [1530201600000, 1530287999000], // 00:00, 23:59
+      ticks: [min, max], // 00:00, 23:59
       formatter: function formatter(val) {
         return moment(val).format('HH:mm');
       },
@@ -101,51 +90,87 @@ function initChart(canvas, width, height) { // 使用 F2 绘制图表
   chart.axis('time', {
     position: 'right'
   });
+  new Promise(function (resolve, reject) {
+    recordApi.getRecordListByDate(app.globalData.openid, that.data.startTime).then((response) => {
+      console.log(response)
+      if (response.status == 200) {
+        response.result.map(
+          (current, index) => {
+            let item_temp = {
+              date: index+1,
+              time: current.createTime
+            }
+            that.data.data.push(item_temp)
+          }
+          , this)
+        console.log(that.data.data)
+        resolve("OK");
+      } else {
+        wx.showToast({
+          title: '加载失败1!',
+          icon: "none",
+          duration: 2000
+        })
+        resolve("errorInElse");
+      }
+    }).catch((res) => {
+      console.log(res)
+      wx.showToast({
+        title: '加载失败2!',
+        icon: "none",
+        duration: 2000
+      })
+      resolve("catch");
+    })
+  }).then(function (r) {
+    // 绘制 guide
+    that.data.data.map(function (obj) {
+      if (obj.time) {
+        chart.guide().tag({
+          position: [obj.date, 'max'],
+          content: moment(obj.time).format('HH:mm'),
+          direct: 'tc',
+          background: {
+            padding: [5], // tag 内边距，使用同 css 盒模型的 padding
+            radius: 2, // tag 圆角
+            fill: '#1890FF' // tag 背景色
+          },
+          side: 6,
+          withPoint: null
+        });
+        chart.guide().line({
+          start: [obj.date, 'min'],
+          end: [obj.date, 'max'],
+          top: false
+        });
+      }
+    });
 
-  // 绘制 guide
-  data.map(function (obj) {
-    if (obj.time) {
-      chart.guide().tag({
-        position: [obj.date, 'max'],
-        content: moment(obj.time).format('HH:mm'),
-        direct: 'tc',
-        background: {
-          padding: [5], // tag 内边距，使用同 css 盒模型的 padding
-          radius: 2, // tag 圆角
-          fill: '#1890FF' // tag 背景色
-        },
-        side: 6,
-        withPoint: null
-      });
-      chart.guide().line({
-        start: [obj.date, 'min'],
-        end: [obj.date, 'max'],
-        top: false
-      });
-    }
-  });
-
-  chart.interval().position('date*time').shape('reverse').size(16).animate({
-    appear: {
-      animation: 'fadeIn'
-    }
-  });
-  chart.render();
-  return chart;
+    chart.interval().position('date*time').shape('reverse').size(16).animate({
+      appear: {
+        animation: 'fadeIn'
+      }
+    });
+    console.log("render")
+    chart.render();
+    return chart;
+  })
 }
 
 Page({
   data: {
-    showDate:'undefined',
     opts: {
       onInit: initChart
-    }
+    },
+    data:[]
   },
 
   onLoad(options) {
+    console.log("load")
+    that = this;
     this.setData({
-      showDate: options.startTime
+      timeStamp: moment(options.startTime, 'YYYY-MM-DD').valueOf(),
+      startTime: options.startTime
     })
-    console.log(options)
   }
 });

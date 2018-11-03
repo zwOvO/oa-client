@@ -24,10 +24,10 @@
   <view class="table">
     <view class="section section_gap">
       <scroll-view class="scroll-view_H" scroll-y bindscrolltolower="lower">
-          <view class="tr" wx:key="item.uuid" wx:for-index="index" wx:for-item="item" wx:for="{{recordList}}">
-            <view class="td">{{dateUtil.format(item.createTime)}}</view>
-          </view>
-        </scroll-view>
+        <view class="tr" wx:key="item.uuid" wx:for-index="index" wx:for-item="item" wx:for="{{recordList}}">
+          <view class="td">{{dateUtil.format(item.createTime)}}</view>
+        </view>
+      </scroll-view>
     </view>
   </view>
   <template is="foot" />

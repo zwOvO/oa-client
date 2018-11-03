@@ -1,6 +1,55 @@
+<wxs module="Util">
+  function DateFormat(ts) {
+    var d = getDate(ts)
+    var Y=d.getFullYear();  
+    var M=p(d.getMonth()+1);  
+    var D=p(d.getDate()); 
+    //var s = d.toLocaleString();
+    var hh = p(d.getHours());
+    var mm = p(d.getMinutes());  
+    ss = p(d.getMilliseconds());
+    return Y+'年'+M+'月'+D+'日'; 
+  }
+  function TypeFormat(type) {
+    var str = "";
+    //请假类型（0：事假、1：婚假、2：丧假、3：产假、4：年假、5：调休、6：病假）
+    if(type == 0)
+      str = "事假";
+    else if(type == 1)
+      str = "婚假";
+    else if(type == 2)
+      str = "丧假";
+    else if(type == 3)
+      str = "产假";
+    else if(type == 4)
+      str = "年假";
+    else if(type == 5)
+      str = "调休";
+    else if(type == 6)
+      str = "病假";
+    return str;
+  }
+  function StatusFormat(status) {
+    var str = "";
+    //请假状态（0：未审核、1：通过、2：拒绝）
+    if(status == 0)
+      str = "未审核";
+    else if(status == 1)
+      str = "通过";
+    else if(status == 2)
+      str = "拒绝";
+    return str;
+  }
+  function p(s) {
+        return s < 10 ? '0' + s: s;
+        }
+  module.exports.DateFormat = DateFormat;
+  module.exports.TypeFormat = TypeFormat;
+  module.exports.StatusFormat = StatusFormat;
+</wxs>
+
 <import src="../../common/head.wxml" />
 <import src="../../common/foot.wxml" />
-
 <view class="container">
   <template is="head" data="{{title: '请假'}}"/>
 
@@ -12,9 +61,16 @@
     </view>
     <view class="page-section">
       <view class="page-section-spacing">
-        <scroll-view scroll-y="true" style="height: 600rpx;background-color:red">
-          <button type="primary">页面主操作 Normal</button>
-        </scroll-view>
+        <scroll-view class="scroll-view_H" scroll-y bindscrolltolower="lower">
+        <view class="tr" wx:key="item.uuid" wx:for-index="index" wx:for-item="item" wx:for="{{recordList}}">
+          <view class="td">
+          {{Util.DateFormat(item.createTime)}}-{{Util.StatusFormat(item.status)}}
+          <view>
+          {{Util.TypeFormat(item.leaveType)}}:{{item.message}}
+          </view>
+          </view>
+        </view>
+      </scroll-view>
       </view>
     </view>
   </view>

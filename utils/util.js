@@ -46,8 +46,6 @@ function request(url, data = {}, method = "GET") {
       data: data,
       method: method,
       header: {
-        'Content-Type': 'application/json',
-        'Authorization': `${wx.getStorageSync('token')}`
       },
       success: function (res) {
         if (res.statusCode == 200) {

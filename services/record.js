@@ -33,7 +33,7 @@ function getRecordList(openId, current, size, startTime, stopTime) {
 
 function getRecordListByDate(openId, date) {
   return new Promise((resolve, reject) => {
-    util.request(api.getRecordList + `/${openId}`, { date }, 'GET').then(res => {
+    util.request(api.getRecordListByDate + `/${openId}`, { date }, 'GET').then(res => {
       resolve(res);
     }).catch((err) => {
       reject(err);

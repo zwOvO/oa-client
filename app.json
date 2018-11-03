@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/index/ff-canvas/column/column",
     "pages/test/test",
     "pages/test/auth/auth",
     "pages/test/register/register",
     "pages/test/register/validateFace/validateFace",
     "pages/test/login/login",
+    "pages/index/ff-canvas/column/column",
     "pages/index/index",
     "pages/index/leave/leave",
     "pages/index/leave/leaveForm/leaveForm",

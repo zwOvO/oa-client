@@ -11,6 +11,9 @@ const api = {
   punchTheClock: `${host}/record`,
   getRecordList: `${host}/record/list`,
   getRecordListByDate: `${host}/record/date`,
+
+  getLeaveList: `${host}/leave/list`,
+  submitLeaveForm: `${host}/leave/submit`,
 }
 
 module.exports = api

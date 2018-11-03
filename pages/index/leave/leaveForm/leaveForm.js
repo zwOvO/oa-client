@@ -1,11 +1,12 @@
-
+import leaveApi from '../../../../services/leave.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    array: ['事假', '婚假', '丧假', '产假', '年假', '调休',"病假"],
+    index:0
   },
 
   /**
@@ -15,52 +16,47 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  bindPickerChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  formSubmit(e) {
+    wx.showLoading({
+      title: '提交中...',
+    })
+    leaveApi.submitLeaveForm(e.detail.value.type, e.detail.value.message).then((response) => {
+      console.log(response)
+      wx.hideLoading();
+      if (response.status == 200) {
+        wx.showModal({
+          title: '请假申请',
+          content:'请假成功！',
+          showCancel:false,
+          success(res){
+            if (res.confirm) {
+              wx.navigateBack({
+                delta:2,
+              })
+            }
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '请假失败!',
+          icon: "none",
+          duration: 2000
+        })
+      }
+    }).catch((res) => {
+      wx.hideLoading();
+      wx.showToast({
+        title: '请假失败!',
+        icon: "none",
+        duration: 2000
+      })
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
