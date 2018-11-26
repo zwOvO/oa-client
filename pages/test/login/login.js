@@ -25,7 +25,7 @@ Page({
     wx.showLoading({
       title: '打卡中...',
     })
-    recordApi.punchTheClock(app.globalData.openid, this.data.uuid).then((response) => {
+    recordApi.punchTheClock(this.data.uuid).then((response) => {
       console.log(response)
       if(response.status == 200)
       {

@@ -6,9 +6,9 @@ const api = require('../utils/api.js');
 const app = getApp()
 
 
-function punchTheClock(openId, uuid) {
+function punchTheClock(id) {
   return new Promise((resolve, reject) => {
-    util.request(api.punchTheClock, { openId,uuid }, 'POST').then(res => {
+    util.request(api.punchTheClock, { openId:app.globalData.openid, id }, 'POST').then(res => {
       if (res.status == 200) {
         //存储用户信息
         resolve(res);
