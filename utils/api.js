@@ -1,6 +1,6 @@
-const host = "http://192.168.31.235:8080/oa-web"
-//const host = "http://192.168.43.64:8080/oa-web"
-//const host = "http://106.12.152.251:8080/oa-web"
+// const host = "http://192.168.31.235:8080/oa-web"
+// const host = "http://192.168.43.64:8080/oa-web"
+const host = "https://www.zwovo.club/oa-web"
 //const host = "http://192.168.122.1:8080/oa-web"
 //const host = "http://192.168.1.116:8080/oa-web"
 const api = {
