@@ -3,6 +3,7 @@
 const host = "https://www.zwovo.club/oa-web"
 //const host = "http://192.168.122.1:8080/oa-web"
 //const host = "http://192.168.1.116:8080/oa-web"
+
 const api = {
   checkUserExist: `${host}/user/exist`,
   register: `${host}/user/register`,
@@ -13,7 +14,6 @@ const api = {
   punchTheClock: `${host}/record`,
   getRecordList: `${host}/record/list`,
   getRecordListByDate: `${host}/record/date`,
-
   getLeaveList: `${host}/leave/list`,
   submitLeaveForm: `${host}/leave/submit`,
 }

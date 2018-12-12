@@ -19,12 +19,6 @@ Page({
     })
     console.log()
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../index/index'
-    })
-  },
 
   scanningCode: function (event) {
     // 登录

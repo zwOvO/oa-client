@@ -10,6 +10,7 @@ Page({
      */
     data: {
     },
+    //获取用户信息
     bindGetUserInfo: function (e) {
       const vm = this;
       wx.showLoading({

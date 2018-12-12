@@ -3,8 +3,9 @@
 <view class="container">
   <template is="head" data="{{title: '考勤打卡应用'}}"/>
   <view class="userinfo">
-    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <!-- bindtap是点击事件 -->
     <button bindtap="scanningCode">打卡</button>
   </view>
   <template is="foot" />

@@ -10,7 +10,7 @@
             <view class="weui-label">授权码</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" require='require' bindblur='bindLicenseInput' name="license" value='{{license}}'/>
+            <input class="weui-input" require='require' bindchange='bindLicenseInput' name="license" value='{{license}}'/>
           </view>
         </view>
       </view>
@@ -20,7 +20,7 @@
             <view class="weui-label">姓名</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" require='require' bindblur='bindNameInput' name="username" value='{{username}}'/>
+            <input class="weui-input" require='require' bindchange='bindNameInput' name="username" value='{{username}}'/>
           </view>
         </view>
       </view>

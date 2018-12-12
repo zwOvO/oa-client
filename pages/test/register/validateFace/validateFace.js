@@ -21,7 +21,7 @@ Page({
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
-      sourceType: ['album'],
+      sourceType: ['album', 'camera'],
       success(res) {
         console.log('chooseImage success, temp path is', res.tempFilePaths[0])
 

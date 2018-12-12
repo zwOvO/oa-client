@@ -94,6 +94,9 @@ function initChart(canvas, width, height) { // 使用 F2 绘制图表
     recordApi.getRecordListByDate(app.globalData.openid, that.data.startTime).then((response) => {
       console.log(response)
       if (response.status == 200) {
+        response.result.sort((a, b) => {
+          return a.createTime > b.createTime;
+        })
         response.result.map(
           (current, index) => {
             let item_temp = {
@@ -105,9 +108,17 @@ function initChart(canvas, width, height) { // 使用 F2 绘制图表
           , this)
         console.log(that.data.data)
         resolve("OK");
+      } else if (response.status == 404) {
+        wx.showToast({
+          title: '没有记录!',
+          icon: "none",
+          duration: 2000
+        })
+        console.log("没有记录")
+        resolve("Empty");
       } else {
         wx.showToast({
-          title: '加载失败1!',
+          title: '服务器出错!',
           icon: "none",
           duration: 2000
         })
