@@ -1,5 +1,11 @@
 import leaveApi from '../../../../services/leave.js'
 Page({
+  data: {
+    startDay: undefined,
+    stopDay: undefined,
+    startTime: undefined,
+    stopTime: undefined,
+  },
 
   /**
    * 页面的初始数据
@@ -16,6 +22,27 @@ Page({
 
   },
 
+  bindStartDayChange: function (e) {
+    this.setData({
+      startDay: e.detail.value
+    })
+  },
+  bindStartTimeChange: function (e) {
+    this.setData({
+      startTime: e.detail.value
+    })
+  },
+  bindStopDayChange: function (e) {
+    this.setData({
+      stopDay: e.detail.value
+    })
+  },
+  bindStopTimeChange: function (e) {
+    this.setData({
+      stopTime: e.detail.value
+    })
+  },
+
   bindPickerChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -24,10 +51,48 @@ Page({
   },
 
   formSubmit(e) {
+    console.log(this.data.startDay)
+    if(this.data.startDay === undefined) {
+      wx.showToast({
+        title: '开始日期不能为空!',
+        icon: "none",
+        duration: 2000
+      })
+      return;
+    }
+    if(this.data.startTime === undefined) {
+      wx.showToast({
+        title: '开始时间不能为空!',
+        icon: "none",
+        duration: 2000
+      })
+      return;
+    }
+    if(this.data.stopDay === undefined) {
+      wx.showToast({
+        title: '结束日期不能为空!',
+        icon: "none",
+        duration: 2000
+      })
+      return;
+    }
+    if(this.data.stopTime === undefined) {
+      wx.showToast({
+        title: '结束时间不能为空!',
+        icon: "none",
+        duration: 2000
+      })
+      return;
+    }
     wx.showLoading({
       title: '提交中...',
     })
-    leaveApi.submitLeaveForm(e.detail.value.type, e.detail.value.message).then((response) => {
+    leaveApi.submitLeaveForm(
+      e.detail.value.type, 
+      e.detail.value.message,
+      this.data.startDay + " " +  this.data.startTime,
+      this.data.stopDay + " " + this.data.stopTime
+      ).then((response) => {
       console.log(response)
       wx.hideLoading();
       if (response.status == 200) {

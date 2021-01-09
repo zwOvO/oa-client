@@ -56,7 +56,7 @@ Page({
               console.log(response)
               wx.hideLoading()
               wx.showToast({
-                title: '授权失败11',
+                title: '服务器连接失败',
                 icon: 'none',
                 duration: 1000
               })

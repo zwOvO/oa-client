@@ -44,5 +44,6 @@
     "downloadFile": 10000
   },
   "workers": "workers",
-  "debug": false
+  "debug": false,
+  "sitemapLocation": "sitemap.json"
 }

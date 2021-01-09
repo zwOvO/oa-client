@@ -6,9 +6,9 @@ const api = require('../utils/api.js');
 const app = getApp()
 
 
-function submitLeaveForm(leaveType, message) {
+function submitLeaveForm(leaveType, message, startTime, stopTime) {
   return new Promise((resolve, reject) => {
-    util.request(api.submitLeaveForm + `/${app.globalData.openid}`, { leaveType, message}, 'POST').then(res => {
+    util.request(api.submitLeaveForm + `/${app.globalData.openid}`, { leaveType, message, startTime, stopTime}, 'POST').then(res => {
       if (res.status == 200) {
         //存储用户信息
         resolve(res);
